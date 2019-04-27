@@ -5,19 +5,17 @@
       <button @click="proceedIntoNextSite()">Wróć</button>
     </div>
     <div v-else>
-      <h1>Pseudo logowanie</h1>
-      Zaloguj się na emial:
-      <input type="text" v-model="email">
-
-      <button @click="proceedIntoNextSite()">Zaloguj</button>
+      <login-form @login="logMeIn($event)"></login-form>
     </div>
   </div>
 </template>
 
 <script>
 import "milligram";
+import LoginForm from "./LoginForm";
 
 export default {
+  components: {LoginForm},
   data() {
     return {
       loginPage: true,
@@ -26,10 +24,16 @@ export default {
   },
   methods: {
     proceedIntoNextSite() {
-      this.loginPage = this.loginPage === false;
+      this.loginPage = true;
+    },
+    logMeIn(username) {
+      this.email = username;
+      this.loginPage = false;
     }
+    
   }
 };
+
 </script>
 
 <style>
